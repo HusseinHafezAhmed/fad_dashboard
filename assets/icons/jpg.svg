@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.15" height="32.757" viewBox="0 0 28.15 32.757">
+  <g id="pdf" transform="translate(-36)">
+    <g id="Group_12555" data-name="Group 12555" transform="translate(37.919 0)">
+      <path id="Path_10817" data-name="Path 10817" d="M89.672,381a.64.64,0,0,0-.64.64V388.1H67.28V381.64a.64.64,0,0,0-1.28,0v7.1a.64.64,0,0,0,.64.64H89.672a.64.64,0,0,0,.64-.64v-7.1A.64.64,0,0,0,89.672,381Z" transform="translate(-66 -356.624)" fill="#fdc240"/>
+      <path id="Path_10818" data-name="Path 10818" d="M90.124,6.585l-6.4-6.4A.64.64,0,0,0,83.274,0H66.64A.64.64,0,0,0,66,.64v13.5a.64.64,0,0,0,1.28,0V1.28H82.634V7.038a.64.64,0,0,0,.64.64h5.758v6.462a.64.64,0,0,0,1.28,0v-7.1A.64.64,0,0,0,90.124,6.585Zm-6.21-4.4L88.127,6.4H83.914Z" transform="translate(-66 0)" fill="#fdc240"/>
+    </g>
+    <path id="Path_10819" data-name="Path 10819" d="M36,216H64.15v11.516H36Z" transform="translate(0 -202.181)" fill="#f2f4f3" fill-rule="evenodd"/>
+    <text id="JPJ" transform="translate(43.576 22)" fill="#fec32d" font-size="8" font-family="Avenir-Heavy, Avenir" font-weight="800"><tspan x="0" y="0">JPJ</tspan></text>
+  </g>
+</svg>
