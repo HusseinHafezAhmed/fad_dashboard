@@ -9,6 +9,7 @@ import '../../../../core/widget/text.dart';
 import '../../controller/user_provider.dart';
 import '../../model/users.dart';
 
+// ignore: must_be_immutable
 class UpdateUserDialog extends StatelessWidget with InputValidation {
   final int index;
   final Users user;
@@ -53,8 +54,7 @@ class UpdateUserDialog extends StatelessWidget with InputValidation {
                                     child: getUserTextInputField(
                                       content: "User Email",
                                       fontSize: 15,
-                                      controller:
-                                          myProvider.emailController,
+                                      controller: myProvider.emailController,
                                       validatorFunction: validateEmail,
                                       autoValidationMode:
                                           AutovalidateMode.disabled,
@@ -69,20 +69,40 @@ class UpdateUserDialog extends StatelessWidget with InputValidation {
                                     width: 500,
                                     child: getUserTextInputField(
                                       inputFormatters: [
-                                        FilteringTextInputFormatter
-                                            .allow(RegExp("[0-9]+")),
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp("[0-9]+")),
                                       ],
                                       content: "User Phone",
                                       fontSize: 15,
-                                      controller: myProvider
-                                          .phoneNumberController,
-                                      validatorFunction:
-                                          validatePhoneNumber,
+                                      controller:
+                                          myProvider.phoneNumberController,
+                                      validatorFunction: validatePhoneNumber,
                                       autoValidationMode:
                                           AutovalidateMode.disabled,
                                       fontColor: MyColors.darkGreyColor,
                                       keyboardType: TextInputType.text,
                                     ),
+                                  ),
+                                ),
+                                Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: SizedBox(
+                                    width: 500,
+                                    child: getUserTextInputField(
+                                        content: "Password",
+                                        fontSize: 15,
+                                        controller:
+                                            myProvider.passwordController,
+                                        validatorFunction: validateLoginInput,
+                                        autoValidationMode:
+                                            AutovalidateMode.disabled,
+                                        fontColor: MyColors.darkGreyColor,
+                                        keyboardType: TextInputType.text,
+                                        isPasswordField: myProvider.isPassword,
+                                        iconButtonWidget: IconButton(
+                                            onPressed: myProvider.togglePassword,
+                                            icon:
+                                                const Icon(Icons.visibility))),
                                   ),
                                 ),
                               ],
@@ -91,8 +111,7 @@ class UpdateUserDialog extends StatelessWidget with InputValidation {
                               height: 30,
                             ),
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
                                   child: AppButton(
@@ -102,6 +121,8 @@ class UpdateUserDialog extends StatelessWidget with InputValidation {
                                       Navigator.pop(context);
                                     },
                                     buttonText: 'Cancel',
+                                    textColor: MyColors.whiteColor,
+
                                     textSize: 15,
                                     height: 40,
                                     width: 160,
@@ -112,12 +133,11 @@ class UpdateUserDialog extends StatelessWidget with InputValidation {
                                     key: const Key('desktop'),
                                     color: MyColors.sideMenuColor,
                                     onPressed: () async {
-                                      await myProvider
-                                          .updateUser(index)
-                                          .then((value) =>
-                                              Navigator.pop(context));
+                                      await myProvider.updateUser(index).then(
+                                          (value) => Navigator.pop(context));
                                     },
                                     buttonText: 'Update',
+                                    textColor: MyColors.whiteColor,
                                     textSize: 15,
                                     height: 40,
                                     width: 160,

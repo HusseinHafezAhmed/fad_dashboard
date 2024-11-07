@@ -1,3 +1,5 @@
+import 'package:fad_dashboard/core/widget/button.dart';
+import 'package:fad_dashboard/modules/user/view/widget/filter_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:number_pagination/number_pagination.dart';
@@ -61,6 +63,53 @@ class _UserBodyState extends State<_UserBody> with InputValidation {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: AppButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => Container(
+                                  alignment: Alignment.center,
+                                  color: MyColors.whiteColor.withOpacity(.3),
+                                  child: Container(
+                                    width: 700,
+                                    height: 550,
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: MyColors.bgColor,
+                                    ),
+                                    child: FilterDialog(),
+                                  ),
+                                ),
+                              ).then((value) => myProvider.getUsers(
+                                  0,
+                                  myProvider.rowCount!.toInt(),
+                                  value ??
+                                      {
+                                        "registrationNo": null,
+                                        "PassportNo": null,
+                                        "phoneNumber": null,
+                                        "email": null,
+                                        "userName": null,
+                                        "userId": null,
+                                        "createDateTimeFrom":
+                                            "1970-11-06T13:53:36.982Z",
+                                        "createDateTimeTo":
+                                            DateTime.now().toIso8601String()
+                                      }));
+                            },
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            width: 100,
+                            buttonText: 'Filter',
+                            color: MyColors.sideMenuColor,
+                            textColor: MyColors.whiteColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
                         MyText.drawText(
                             content: 'Users',
                             fontColor: MyColors.lightBlackColor,
@@ -68,9 +117,6 @@ class _UserBodyState extends State<_UserBody> with InputValidation {
                             fontSize: 22),
                         const SizedBox(
                           height: 30,
-                        ),
-                       const SizedBox(
-                          height: 40,
                         ),
                         myProvider.isTableFetching
                             ? Center(
@@ -136,10 +182,12 @@ class _UserBodyState extends State<_UserBody> with InputValidation {
                                       myProvider.getUsers(
                                           offset,
                                           myProvider.rowCount!.toInt(),
-                                          );
+                                          myProvider.filterMap);
                                     }
                                   },
-                                  pageTotal: (myProvider.total! / myProvider.rowCount!).ceil(),
+                                  pageTotal:
+                                      (myProvider.total! / myProvider.rowCount!)
+                                          .ceil(),
                                   colorPrimary: MyColors.sideMenuColor,
                                   threshold: 5,
                                 ),

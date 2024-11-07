@@ -14,14 +14,25 @@ import '../view/widget/users_table.dart';
 
 class UserProvider extends ChangeNotifier {
   UserProvider() {
-    getUsers(0, rowCount!.toInt());
+    getUsers(0, rowCount!.toInt(), filterMap);
   }
   UserProvider.update(Users user) {
     phoneNumberController.text = user.phoneNumber!.substring(2);
     emailController.text = user.email!;
+    // passwordController.text = user.password!;
   }
   UserProvider.suspend();
-
+  UserProvider.filter();
+  Map<String, dynamic> filterMap = {
+    "registrationNo": null,
+    "PassportNo": null,
+    "phoneNumber": null,
+    "email": null,
+    "userName": null,
+    "userId": null,
+    "createDateTimeFrom": "1970-11-06T13:53:36.982Z",
+    "createDateTimeTo": DateTime.now().toIso8601String()
+  };
   double? rowCount = 10;
   int? selected = 0;
   int? takes;
@@ -34,19 +45,24 @@ class UserProvider extends ChangeNotifier {
   UsersDataSource? usersDataSource = UsersDataSource(userData: [], total: 0);
 
   TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passportNoController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> updateFormKey = GlobalKey<FormState>();
+  bool isPassword = true;
+  togglePassword() {
+    isPassword = !isPassword;
+    notifyListeners();
+  }
 
-  Future<void> getUsers(
-    int skip,
-    int take,
-  ) async {
+  Future<void> getUsers(int skip, int take, filter) async {
     takes = take;
     skips = skip;
     users = [];
     isTableFetching = true;
     notifyListeners();
-    Map response = await GetUsersApi().getUsers(take, skip);
+    Map response = await GetUsersApi().getUsers(take, skip, filter);
     var status = response['status'];
     var data = response['data']['users'];
     total = response['data']['count'];
@@ -65,16 +81,24 @@ class UserProvider extends ChangeNotifier {
 
   Future<void> updateUser(ind) async {
     int id = int.parse(users[ind].id.toString());
-    Map<String, dynamic> data = {
-      "id": id,
-      "phoneNumber": "+2${phoneNumberController.text.trim()}",
-      "email": emailController.text.trim()
-    };
+    Map<String, dynamic> data = passwordController.text.trim() == ""
+        ? {
+            "id": id,
+            "phoneNumber": "+2${phoneNumberController.text.trim()}",
+            "email": emailController.text.trim(),
+           // "password": null
+          }
+        : {
+            "id": id,
+            "phoneNumber": "+2${phoneNumberController.text.trim()}",
+            "email": emailController.text.trim(),
+            "password": passwordController.text
+          };
     Map response = await UpdateUserApi().update(data);
     var status = response['status'];
     String message = response['message'].toString();
     if (status) {
-    locator<NavigationService>().navigateTo(userRoute);
+      locator<NavigationService>().navigateTo(userRoute);
       MyToast(message, webBgColor: "#828FA8");
     }
     notifyListeners();

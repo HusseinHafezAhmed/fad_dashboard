@@ -58,7 +58,7 @@ class MyButton {
   }
 }
 
-class AppButton extends StatefulWidget {
+class AppButton extends StatelessWidget {
   final Color? color;
   final double? height;
   final double? width;
@@ -68,6 +68,7 @@ class AppButton extends StatefulWidget {
   final String? icon;
   final Color? iconColor;
   MaterialStateProperty? mt;
+  final EdgeInsetsGeometry? padding;
 
   ///for Add to Cart button in Products card
   final bool? isIcon;
@@ -83,49 +84,12 @@ class AppButton extends StatefulWidget {
     this.textSize,
     this.buttonText,
     this.textColor,
-    this.isIcon,
+    this.isIcon =false,
     this.iconColor,
     @required this.onPressed,
+    this.padding,
   }) : super(key: key);
 
-  @override
-  _AppButtonState createState() => _AppButtonState(
-      color: color ?? MyColors.blueColor,
-      height: height ?? 60,
-      width: width ?? 400,
-      textSize: textSize ?? 13,
-      buttonText: buttonText ?? '',
-      textColor: textColor ?? Colors.white,
-      isIcon: isIcon ?? false,
-      icon: icon,
-      iconColor: iconColor ?? MyColors.primaryColor,
-      onPressed: onPressed);
-}
-
-class _AppButtonState extends State<AppButton> {
-  Color? color = MyColors.blueColor;
-  double? height;
-  double? width;
-  double? textSize;
-  String? buttonText;
-  Color? textColor;
-  String? icon;
-  Color? iconColor = MyColors.primaryColor;
-  bool? isIcon = false;
-
-  final VoidCallback? onPressed;
-  _AppButtonState({
-    this.color,
-    this.height,
-    this.width,
-    this.textSize,
-    this.buttonText,
-    this.textColor,
-    this.icon,
-    this.iconColor,
-    this.isIcon,
-    @required this.onPressed,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +97,7 @@ class _AppButtonState extends State<AppButton> {
       height: height ?? height,
       width: width ?? width,
       child: MaterialButton(
+        padding: padding,
         elevation: 0,
         highlightElevation: 0,
         onPressed: onPressed,

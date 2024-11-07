@@ -219,6 +219,8 @@ class _LoginDesktopWidgetState extends State<LoginDesktopWidget>
                                       }
                                     },
                                     buttonText: 'Login',
+                                    textColor: MyColors.whiteColor,
+
                                     textSize: 18,
                                     height: 50,
                                     width: double.infinity,

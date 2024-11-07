@@ -1,16 +1,11 @@
-// ignore: file_names
-// ignore_for_file: prefer_typing_uninitialized_variables, library_private_types_in_public_api, use_build_context_synchronously
 
-import 'dart:async';
+// ignore_for_file: library_private_types_in_public_api
 
-import 'package:fad_dashboard/Provider/main_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 import '../../../../core/constant/my_colors.dart';
-import '../../../../core/widget/button.dart';
 import '../../../../core/widget/image.dart';
 import '../../../../core/widget/text.dart';
 import '../../controller/user_provider.dart';
@@ -319,11 +314,11 @@ class UsersDataSource extends DataGridSource {
               )
             : e.columnName == 'syndicateId'
                 ? ImageContainer(url: e.value)
-                : e.columnName == 'delete'
-                    ? DeleteContainer(
-                        e: e,
-                        i: effectiveRows.indexOf(row),
-                      )
+                // : e.columnName == 'delete'
+                //     ? DeleteContainer(
+                //         e: e,
+                //         i: effectiveRows.indexOf(row),
+                //       )
                     : e.columnName == 'suspend'
                         ? SuspendedUser(
                             e: e.value,
@@ -402,90 +397,90 @@ class ImageContainer extends StatelessWidget {
   }
 }
 
-class DeleteContainer extends StatelessWidget {
-  const DeleteContainer({Key? key, this.i, this.e}) : super(key: key);
-  final e;
-  final i;
+// class DeleteContainer extends StatelessWidget {
+//   const DeleteContainer({Key? key, this.i, this.e}) : super(key: key);
+//   final e;
+//   final i;
 
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<UserProvider>(builder: (_, UserProvider myProvider, child) {
-      return InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          onTap: () async {
-            showDialog(
-              builder: (context) => Container(
-                alignment: Alignment.center,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
-                  width: 400,
-                  padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
-                  child: Center(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          MyText.drawText(
-                              content:
-                                  'Are you sure you want to delete this user?',
-                              fontColor: MyColors.primaryColor,
-                              bold: true,
-                              fontSize: 18),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 30.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: AppButton(
-                                    key: const Key('desktop'),
-                                    color: MyColors.greyColor,
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    buttonText: 'Cancel',
-                                    textSize: 15,
-                                    height: 40,
-                                    width: 160,
-                                  ),
-                                ),
-                                Flexible(
-                                  child: AppButton(
-                                    key: const Key('desktop'),
-                                    color: MyColors.primaryColor,
-                                    onPressed: () async {
-                                      //   await myProvider.deleteUser(i);
-                                      Navigator.pop(context);
-                                    },
-                                    buttonText: 'Confirm',
-                                    textSize: 15,
-                                    height: 40,
-                                    width: 160,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ]),
-                  ),
-                ),
-              ),
-              context: context,
-            );
-          },
-          child: MyImage.drawImage('assets/icons/delete.svg',
-              color: Colors.red, width: 20, height: 20));
-    });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Consumer<UserProvider>(builder: (_, UserProvider myProvider, child) {
+//       return InkWell(
+//           splashColor: Colors.transparent,
+//           highlightColor: Colors.transparent,
+//           hoverColor: Colors.transparent,
+//           onTap: () async {
+//             showDialog(
+//               builder: (context) => Container(
+//                 alignment: Alignment.center,
+//                 child: Container(
+//                   decoration: BoxDecoration(
+//                       color: Colors.white,
+//                       borderRadius: BorderRadius.circular(12)),
+//                   width: 400,
+//                   padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
+//                   child: Center(
+//                     child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         crossAxisAlignment: CrossAxisAlignment.center,
+//                         children: [
+//                           MyText.drawText(
+//                               content:
+//                                   'Are you sure you want to delete this user?',
+//                               fontColor: MyColors.primaryColor,
+//                               bold: true,
+//                               fontSize: 18),
+//                           const SizedBox(
+//                             height: 40,
+//                           ),
+//                           Padding(
+//                             padding:
+//                                 const EdgeInsets.symmetric(horizontal: 30.0),
+//                             child: Row(
+//                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                               children: [
+//                                 Flexible(
+//                                   child: AppButton(
+//                                     key: const Key('desktop'),
+//                                     color: MyColors.greyColor,
+//                                     onPressed: () {
+//                                       Navigator.pop(context);
+//                                     },
+//                                     buttonText: 'Cancel',
+//                                     textSize: 15,
+//                                     height: 40,
+//                                     width: 160,
+//                                   ),
+//                                 ),
+//                                 Flexible(
+//                                   child: AppButton(
+//                                     key: const Key('desktop'),
+//                                     color: MyColors.primaryColor,
+//                                     onPressed: () async {
+//                                       //   await myProvider.deleteUser(i);
+//                                       Navigator.pop(context);
+//                                     },
+//                                     buttonText: 'Confirm',
+//                                     textSize: 15,
+//                                     height: 40,
+//                                     width: 160,
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ]),
+//                   ),
+//                 ),
+//               ),
+//               context: context,
+//             );
+//           },
+//           child: MyImage.drawImage('assets/icons/delete.svg',
+//               color: Colors.red, width: 20, height: 20));
+//     });
+//   }
+// }
 
 class SuspendedUser extends StatelessWidget {
   const SuspendedUser({Key? key, required this.i, required this.e})
@@ -534,36 +529,36 @@ class SuspendedUser extends StatelessWidget {
   }
 }
 
-class UnSuspendedUser extends StatelessWidget {
-  const UnSuspendedUser({Key? key, this.i, this.e}) : super(key: key);
-  final e;
-  final i;
+// class UnSuspendedUser extends StatelessWidget {
+//   const UnSuspendedUser({Key? key, this.i, this.e}) : super(key: key);
+//   final e;
+//   final i;
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      onTap: () async {
-        // await Provider.of<UserProvider>(context, listen: false)
-        //     .unSuspendedUser(i);
-      },
-      child: Padding(
-        padding:
-            const EdgeInsets.only(left: 20.0, right: 20, top: 5, bottom: 5),
-        child: Container(
-            decoration: BoxDecoration(
-              color: MyColors.primaryColor,
-              borderRadius: BorderRadius.circular(3),
-            ),
-            child: Center(
-              child: MyText.drawText(
-                  content: 'UnSuspended',
-                  fontSize: 12,
-                  fontColor: Colors.white),
-            )),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       splashColor: Colors.transparent,
+//       highlightColor: Colors.transparent,
+//       hoverColor: Colors.transparent,
+//       onTap: () async {
+//         // await Provider.of<UserProvider>(context, listen: false)
+//         //     .unSuspendedUser(i);
+//       },
+//       child: Padding(
+//         padding:
+//             const EdgeInsets.only(left: 20.0, right: 20, top: 5, bottom: 5),
+//         child: Container(
+//             decoration: BoxDecoration(
+//               color: MyColors.primaryColor,
+//               borderRadius: BorderRadius.circular(3),
+//             ),
+//             child: Center(
+//               child: MyText.drawText(
+//                   content: 'UnSuspended',
+//                   fontSize: 12,
+//                   fontColor: Colors.white),
+//             )),
+//       ),
+//     );
+//   }
+// }

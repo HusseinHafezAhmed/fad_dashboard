@@ -86,6 +86,8 @@ class SuspendedUserDialog extends StatelessWidget {
                                       Navigator.pop(context);
                                     },
                                     buttonText: 'Cancel',
+                                    textColor: MyColors.whiteColor,
+
                                     textSize: 15,
                                     height: 40,
                                     width: 160,
@@ -109,6 +111,8 @@ class SuspendedUserDialog extends StatelessWidget {
                                     buttonText: user.isSuspended!
                                         ? "UnSuspend"
                                         : 'Suspend',
+                                    textColor: MyColors.whiteColor,
+
                                     textSize: 15,
                                     height: 40,
                                     width: 160,

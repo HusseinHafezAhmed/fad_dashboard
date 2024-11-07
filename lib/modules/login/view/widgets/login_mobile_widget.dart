@@ -218,6 +218,8 @@ class _LoginMobileWidgetState extends State<LoginMobileWidget>
                                       }
                                     },
                                     buttonText: 'Login',
+                                    textColor: MyColors.whiteColor,
+
                                     textSize: 18,
                                     height: 50,
                                     width: double.infinity,

@@ -159,6 +159,8 @@ class _ConfirmLoginDesktopWidgetState extends State<ConfirmLoginDesktopWidget>
                                     }
                                   },
                                   buttonText: 'Login',
+                                    textColor: MyColors.whiteColor,
+
                                   textSize: 18,
                                   height: 50,
                                   width: double.infinity,
